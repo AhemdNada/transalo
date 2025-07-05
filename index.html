@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Transalo - AI-Powered Translation API for Websites</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="favicon.ico  ">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-white overflow-x-hidden">
+    <!-- Navbar -->
+    <nav class="fixed top-4 w-full bg-white/95 backdrop-blur-sm z-50 border-2 border-green-600 rounded-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="http://localhost:8000/" class="block">
+                            <img src="logo-dark.png" alt="Transalo Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#features" class="nav-link">Features</a>
+                        <a href="#how-it-works" class="nav-link">How It Works</a>
+                        <!-- <a href="#statistics" class="nav-link">Statistics</a> -->
+                        <!-- <a href="#partners" class="nav-link">Partners</a> -->
+                        <a href="#pricing" class="nav-link">Pricing</a>
+                        <a href="#faq" class="nav-link">FAQ</a>
+                    </div>
+                </div>
+
+                <!-- Right side items -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <!-- Language Selector -->
+                    <div class="relative">
+                        <select class="desktop-language-selector">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                        </select>
+                    </div>
+
+                    <!-- Auth Buttons -->
+                    <div class="flex items-center space-x-3">
+                        <button class="desktop-btn-secondary">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Login
+                        </button>
+                        <button class="desktop-btn-primary">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="mobile-menu-btn text-gray-600 hover:text-primary transition-colors duration-200" type="button" aria-label="Open mobile menu" onclick="console.log('Button clicked via onclick');">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Navigation -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 md:hidden">
+        <!-- Backdrop -->
+        <div id="mobile-backdrop" class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+        
+        <!-- Sidebar -->
+        <div id="mobile-sidebar-content" class="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center">
+                    <a href="http://localhost:8000/" class="block">
+                        <img src="logo-dark.png" alt="Transalo Logo" class="h-8 w-auto inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-1">
+                    </a>
+                </div>
+                <button id="mobile-close-button" class="text-gray-500 hover:text-gray-700 transition-colors duration-200" type="button" aria-label="Close mobile menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="p-6">
+                <div class="space-y-4">
+                    <a href="#features" class="mobile-sidebar-link">
+                        <i class="fas fa-star mr-3 text-primary"></i>
+                        Features
+                    </a>
+                    <a href="#how-it-works" class="mobile-sidebar-link">
+                        <i class="fas fa-cogs mr-3 text-primary"></i>
+                        How It Works
+                    </a>
+                    <!-- <a href="#statistics" class="mobile-sidebar-link">
+                        <i class="fas fa-chart-bar mr-3 text-primary"></i>
+                        Statistics
+                    </a>
+                    <a href="#partners" class="mobile-sidebar-link">
+                        <i class="fas fa-handshake mr-3 text-primary"></i>
+                        Partners
+                    </a> -->
+                    <a href="#pricing" class="mobile-sidebar-link">
+                        <i class="fas fa-tags mr-3 text-primary"></i>
+                        Pricing
+                    </a>
+                    <a href="#faq" class="mobile-sidebar-link">
+                        <i class="fas fa-question-circle mr-3 text-primary"></i>
+                        FAQ
+                    </a>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                    <select class="mobile-language-selector">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </div>
+                
+                <!-- Auth Buttons -->
+                <div class="mt-6 space-y-3">
+                    <button class="mobile-btn-secondary w-full">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Login
+                    </button>
+                    <button class="mobile-btn-primary w-full">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-16 bg-white header-full-height">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <!-- Left Content -->
+                <div data-aos="fade-right">
+                    <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                        Translate Your Website
+                        <span class="text-primary">Instantly</span>
+                    </h1>
+                    <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+                        Transform your website into a global platform with our AI-powered translation API. 
+                        Reach millions of users worldwide with just a few lines of code.
+                    </p>
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary btn-large">
+                            Get Started 
+                            <i class="fas fa-arrow-right ml-2"></i>
+                        </button>
+                        
+                    </div>
+                </div>
+
+                <!-- Right Content - Illustration -->
+                <div data-aos="fade-left" class="relative">
+                    <div class="relative z-10">
+                        <div class="bg-white rounded-2xl shadow-2xl p-8 transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                            <div class="flex items-center justify-between mb-6">
+                                <div class="flex items-center space-x-3">
+                                    <div class="w-3 h-3 bg-red-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-yellow-500 rounded-full"></div>
+                                    <div class="w-3 h-3 bg-green-500 rounded-full"></div>
+                                </div>
+                                <div class="text-sm text-gray-500">transalo.com</div>
+                            </div>
+                            <div class="space-y-4">
+                                <div class="h-4 bg-gray-200 rounded w-3/4"></div>
+                                <div class="h-4 bg-gray-200 rounded w-1/2"></div>
+                                <div class="h-4 bg-gray-200 rounded w-5/6"></div>
+                            </div>
+                            <div class="mt-6 p-4 bg-green-50 rounded-lg">
+                                <div class="flex items-center space-x-2">
+                                    <i class="fas fa-language text-primary"></i>
+                                    <span class="text-sm font-medium">Auto-translated to 50+ languages</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="absolute -top-4 -right-4 w-32 h-32 bg-green-100 rounded-full opacity-20"></div>
+                    <div class="absolute -bottom-4 -left-4 w-24 h-24 bg-green-100 rounded-full opacity-20"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="features" class="py-20 bg-white" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block group">
+                    <span class="section-title relative z-10">
+                        Powerful Features for Global Reach
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-500 to-blue-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Everything you need to make your website accessible to users worldwide
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Feature 1 Lightning Fast -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-left">
+                    <div class="p-6">
+                        <div class="text-blue-500 text-4xl mb-4 transition-all duration-300 group-hover:text-blue-600 group-hover:scale-110">
+                            <i class="fas fa-bolt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Lightning Fast</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Real-time translation with sub-second response times. No waiting, no delays.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Feature 2 50+ Languages -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-right">
+                    <div class="p-6">
+                        <div class="text-purple-500 text-4xl mb-4 transition-all duration-300 group-hover:text-purple-600 group-hover:scale-110">
+                            <i class="fas fa-globe"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">50+ Languages</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Support for major world languages with regional dialect variations.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Feature 3 AI-Powered -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-up">
+                    <div class="p-6">
+                        <div class="text-green-500 text-4xl mb-4 transition-all duration-300 group-hover:text-green-600 group-hover:scale-110">
+                            <i class="fas fa-robot"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">AI-Powered</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Advanced neural networks ensure accurate and context-aware translations.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-green-400 to-green-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Feature 4 Easy Integration -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="fade-down">
+                    <div class="p-6">
+                        <div class="text-orange-500 text-4xl mb-4 transition-all duration-300 group-hover:text-orange-600 group-hover:scale-110">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Easy Integration</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Simple REST API with comprehensive documentation and SDKs.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-orange-400 to-orange-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Feature 5 Enterprise Security -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="zoom-in">
+                    <div class="p-6">
+                        <div class="text-indigo-500 text-4xl mb-4 transition-all duration-300 group-hover:text-indigo-600 group-hover:scale-110">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Enterprise Security</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            SOC 2 compliant with end-to-end encryption and data privacy.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-indigo-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Feature 6 Analytics Dashboard -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100" data-aos="zoom-in-up">
+                    <div class="p-6">
+                        <div class="text-red-500 text-4xl mb-4 transition-all duration-300 group-hover:text-red-600 group-hover:scale-110">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <h3 class="text-xl font-semibold mb-3 text-gray-800 group-hover:text-gray-900">Analytics Dashboard</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Track usage, performance, and translation quality in real-time.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-red-400 to-red-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section id="how-it-works" class="py-20 bg-gradient-to-b from-white to-gray-50" data-aos="fade-up">
+        <div class="container mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4 relative inline-block group">
+                    <span class="section-title relative z-10">
+                        How It Works
+                        <span class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-500 to-purple-600 transform scale-x-0 origin-left transition-transform duration-500 group-hover:scale-x-100"></span>
+                    </span>
+                </h2>
+                <p class="text-lg text-gray-600 max-w-2xl mx-auto">
+                    Get your website translated in just three simple steps
+                </p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8 mb-16 relative">
+                <!-- line connections steps-->
+                <div class="hidden md:block absolute top-1/4 left-0 right-0 h-1 bg-gradient-to-r from-blue-400 to-purple-500 transform -translate-y-1/2 z-0"></div>
+                
+                <!-- Step 1 -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100 z-10" data-aos="fade-left">
+                    <div class="p-8 text-center">
+                        <div class="feature-icon mx-auto mb-6 w-20 h-20 rounded-full bg-blue-50 flex items-center justify-center text-blue-500 text-3xl transition-all duration-300 group-hover:bg-blue-100 group-hover:text-blue-600 group-hover:scale-110">
+                            <i class="fas fa-user-plus"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">1. Sign Up & Get API Key</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Create your account and receive your unique API key instantly.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-blue-400 to-blue-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Step 2 -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100 z-10" data-aos="fade-up">
+                    <div class="p-8 text-center">
+                        <div class="feature-icon mx-auto mb-6 w-20 h-20 rounded-full bg-purple-50 flex items-center justify-center text-purple-500 text-3xl transition-all duration-300 group-hover:bg-purple-100 group-hover:text-purple-600 group-hover:scale-110">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">2. Integrate API</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Add our JavaScript snippet or use our REST API to your website.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-purple-400 to-purple-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+                
+                <!-- Step 3 -->
+                <div class="feature-card group relative bg-white rounded-xl shadow-md overflow-hidden transition-all duration-300 hover:shadow-xl hover:-translate-y-2 border border-gray-100 z-10" data-aos="fade-right">
+                    <div class="p-8 text-center">
+                        <div class="feature-icon mx-auto mb-6 w-20 h-20 rounded-full bg-indigo-50 flex items-center justify-center text-indigo-500 text-3xl transition-all duration-300 group-hover:bg-indigo-100 group-hover:text-indigo-600 group-hover:scale-110">
+                            <i class="fas fa-rocket"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold mb-4 text-gray-800 group-hover:text-gray-900">3. Go Live</h3>
+                        <p class="text-gray-600 group-hover:text-gray-700 transition-colors duration-300">
+                            Your website is now automatically translated for global users.
+                        </p>
+                    </div>
+                    <div class="absolute bottom-0 left-0 w-full h-1 bg-gradient-to-r from-indigo-400 to-indigo-600 transform origin-left scale-x-0 transition-transform duration-500 group-hover:scale-x-100"></div>
+                </div>
+            </div>
+            
+            <!-- Code Example -->
+            <div class="mt-16" data-aos="fade-up" data-aos-delay="400">
+                <div class="bg-gray-900 rounded-lg p-6">
+                    <div class="flex items-center justify-between mb-4">
+                        <h4 class="text-white font-semibold">Quick Integration Example</h4>
+                        <button class="text-gray-400 hover:text-white" onclick="copyCode()">
+                            <i class="fas fa-copy"></i>
+                        </button>
+                    </div>
+                    <pre class="text-green-400 text-sm overflow-x-auto"><code id="code-example">&lt;script src="https://api.transalo.com/v1/translate.js"&gt;&lt;/script&gt;
+&lt;script&gt;
+  Transalo.init({
+    apiKey: 'your-api-key',
+    targetLanguages: ['es', 'fr', 'de', 'ja'],
+    autoDetect: true
+  });
+&lt;/script&gt;</code></pre>
+                </div>
+            </div>
+        </div>
+    </section>
+
+        <!-- Enhanced Pricing Section -->
+    <section id="pricing" class="py-20 bg-bg-primary">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-text-primary mb-4">
+                    Simple, Transparent Pricing
+                </h2>
+                <p class="text-xl text-text-secondary mb-8">
+                    Choose the plan that fits your needs
+                </p>
+                
+                <!-- Billing Toggle -->
+                <div class="flex items-center justify-center space-x-4">
+                    <span class="text-text-secondary">Monthly</span>
+                    <button id="billing-toggle" class="relative inline-flex h-6 w-11 items-center rounded-full bg-gray-200 transition-colors focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2">
+                        <span id="toggle-slider" class="inline-block h-4 w-4 transform rounded-full bg-white transition-transform"></span>
+                    </button>
+                    <span class="text-text-secondary">Yearly <span class="text-primary font-semibold">(Save 20%)</span></span>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <!-- Starter Plan -->
+                <div class="relative bg-bg-primary rounded-xl shadow-lg overflow-hidden border border-border-color hover:border-primary transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-delay="100">
+                    <div class="p-8 text-center">
+                        <h3 class="text-2xl font-bold text-text-primary mb-2">Starter</h3>
+                        <p class="text-text-secondary mb-6">Perfect for small websites</p>
+                        <div class="mb-8 price-container">
+                            <span class="text-4xl font-bold text-text-primary">$29</span>
+                            <span class="text-text-secondary">/month</span>
+                        </div>
+                        <a href="#" class="block w-full py-3 px-6 bg-primary hover:bg-primary-dark text-white font-medium rounded-lg transition-colors duration-300 mb-8">
+                            Get Started
+                        </a>
+                        <ul class="space-y-4 text-left">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">100,000 translations/month</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">10 languages</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Basic analytics</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Email support</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Pro Plan (Featured) -->
+                <div class="relative bg-bg-primary rounded-xl shadow-xl overflow-hidden border-2 border-primary transform scale-105 z-10" data-aos="fade-up" data-aos-delay="200">
+                    <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary to-primary-dark"></div>
+                    <div class="p-8 text-center">
+                        <div class="absolute top-4 right-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full">
+                            MOST POPULAR
+                        </div>
+                        <h3 class="text-2xl font-bold text-text-primary mb-2">Pro</h3>
+                        <p class="text-text-secondary mb-6">For growing businesses</p>
+                        <div class="mb-8 price-container">
+                            <span class="text-4xl font-bold text-text-primary">$99</span>
+                            <span class="text-text-secondary">/month</span>
+                        </div>
+                        <a href="#" class="block w-full py-3 px-6 bg-primary hover:bg-primary-dark text-white font-medium rounded-lg transition-colors duration-300 mb-8">
+                            Start Free Trial
+                        </a>
+                        <ul class="space-y-4 text-left">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">1,000,000 translations/month</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">50+ languages</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Advanced analytics</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Priority support</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Custom domains</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Enterprise Plan -->
+                <div class="relative bg-bg-primary rounded-xl shadow-lg overflow-hidden border border-border-color hover:border-primary transition-all duration-300 hover:shadow-xl" data-aos="fade-up" data-aos-delay="300">
+                    <div class="p-8 text-center">
+                        <h3 class="text-2xl font-bold text-text-primary mb-2">Enterprise</h3>
+                        <p class="text-text-secondary mb-6">For large organizations</p>
+                        <div class="mb-8">
+                            <span class="text-4xl font-bold text-text-primary">Custom</span>
+                        </div>
+                        <a href="#" class="block w-full py-3 px-6 bg-bg-primary border border-primary text-primary font-medium rounded-lg transition-colors duration-300 mb-8">
+                            Contact Sales
+                        </a>
+                        <ul class="space-y-4 text-left">
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Unlimited translations</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">All languages</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Custom AI models</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">Dedicated support</span>
+                            </li>
+                            <li class="flex items-center">
+                                <i class="fas fa-check text-success mr-3"></i>
+                                <span class="text-text-secondary">SLA guarantee</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Statistics Section -->
+    <section id="statistics" class="py-20 bg-gradient-to-r from-green-50 to-blue-50 statistics-section">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Trusted by Global Businesses
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Join thousands of companies that trust Transalo for their translation needs
+                </p>
+            </div>
+
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+                <!-- Users Count -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="100">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-users text-2xl text-green-600"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2 counter" data-target="50000">0</div>
+                        <p class="text-gray-600 font-medium">Active Users</p>
+                    </div>
+                </div>
+
+                <!-- Translations Count -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="200">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-language text-2xl text-blue-600"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2 counter" data-target="1000000">0</div>
+                        <p class="text-gray-600 font-medium">Words Translated</p>
+                    </div>
+                </div>
+
+                <!-- Languages Supported -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="300">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-globe text-2xl text-purple-600"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2 counter" data-target="50">0</div>
+                        <p class="text-gray-600 font-medium">Languages Supported</p>
+                    </div>
+                </div>
+
+                <!-- Countries Reached -->
+                <div class="text-center" data-aos="fade-up" data-aos-delay="400">
+                    <div class="bg-white rounded-2xl p-8 shadow-lg hover:shadow-xl transition-shadow duration-300">
+                        <div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-flag text-2xl text-orange-600"></i>
+                        </div>
+                        <div class="text-4xl font-bold text-gray-900 mb-2 counter" data-target="150">0</div>
+                        <p class="text-gray-600 font-medium">Countries Reached</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Partners Section -->
+    <section id="partners" class="py-20 bg-white partners-section overflow-hidden">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Trusted by Industry Leaders
+                </h2>
+                <p class="text-xl text-gray-600 max-w-2xl mx-auto">
+                    Leading companies choose Transalo for their global expansion needs
+                </p>
+            </div>
+
+            <!-- Scrolling Partners Container -->
+            <div class="partners-scroll-container">
+                <div class="partners-scroll-track">
+                    <!-- First set of partners -->
+                    <div class="partners-group">
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">TechCorp</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">GlobalSoft</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">InnovateLab</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">DataFlow</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">CloudTech</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">NextGen</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">SmartTech</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">FutureLab</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Duplicate set for seamless loop -->
+                    <div class="partners-group">
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">TechCorp</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">GlobalSoft</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">InnovateLab</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">DataFlow</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">CloudTech</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">NextGen</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">SmartTech</div>
+                            </div>
+                        </div>
+                        <div class="partner-logo">
+                            <div class="bg-gray-50 rounded-xl p-6 h-24 flex items-center justify-center hover:bg-gray-100 transition-colors duration-300">
+                                <div class="text-2xl font-bold text-gray-400">FutureLab</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced FAQ Section -->
+    <section id="faq" class="py-20 bg-bg-secondary">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16" data-aos="fade-up">
+                <h2 class="text-4xl font-bold text-text-primary mb-4">
+                    Frequently Asked Questions
+                </h2>
+                <p class="text-xl text-text-secondary">
+                    Everything you need to know about Transalo
+                </p>
+            </div>
+
+            <div class="space-y-4">
+                <!-- FAQ Item 1 -->
+                <div class="group rounded-xl bg-bg-primary overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-border-color" data-aos="fade-up" data-aos-delay="100">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-text-primary">How accurate are the translations?</span>
+                        <div class="ml-4 h-5 w-5 flex items-center justify-center faq-icon-container">
+                            <i class="fas fa-chevron-down text-primary transform transition-transform duration-300 group-[.active]:rotate-180"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 pt-0 max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-96 group-[.active]:pb-6">
+                        <div class="text-text-secondary">
+                            <p>Our AI-powered translation engine achieves 95%+ accuracy for most language pairs. We use advanced neural networks trained on millions of high-quality translation pairs to ensure context-aware and natural-sounding translations.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 2 -->
+                <div class="group rounded-xl bg-bg-primary overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-border-color" data-aos="fade-up" data-aos-delay="200">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-text-primary">How long does integration take?</span>
+                        <div class="ml-4 h-5 w-5 flex items-center justify-center faq-icon-container">
+                            <i class="fas fa-chevron-down text-primary transform transition-transform duration-300 group-[.active]:rotate-180"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 pt-0 max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-96 group-[.active]:pb-6">
+                        <div class="text-text-secondary">
+                            <p>Integration typically takes 5-10 minutes. Simply add our JavaScript snippet to your website or use our REST API. Our comprehensive documentation and SDKs make the process straightforward for developers of all skill levels.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 3 -->
+                <div class="group rounded-xl bg-bg-primary overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-border-color" data-aos="fade-up" data-aos-delay="300">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-text-primary">Can I customize the translation behavior?</span>
+                        <div class="ml-4 h-5 w-5 flex items-center justify-center faq-icon-container">
+                            <i class="fas fa-chevron-down text-primary transform transition-transform duration-300 group-[.active]:rotate-180"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 pt-0 max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-96 group-[.active]:pb-6">
+                        <div class="text-text-secondary">
+                            <p>Yes! You can customize translation settings, exclude specific content, add custom translations, and even train custom models for industry-specific terminology. Our API provides extensive configuration options.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 4 -->
+                <div class="group rounded-xl bg-bg-primary overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-border-color" data-aos="fade-up" data-aos-delay="400">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-text-primary">What about data privacy and security?</span>
+                        <div class="ml-4 h-5 w-5 flex items-center justify-center faq-icon-container">
+                            <i class="fas fa-chevron-down text-primary transform transition-transform duration-300 group-[.active]:rotate-180"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 pt-0 max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-96 group-[.active]:pb-6">
+                        <div class="text-text-secondary">
+                            <p>We take security seriously. All data is encrypted in transit and at rest. We're SOC 2 compliant and GDPR-ready. You can also choose to process translations locally for maximum privacy.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- FAQ Item 5 -->
+                <div class="group rounded-xl bg-bg-primary overflow-hidden shadow-sm hover:shadow-md transition-shadow duration-300 border border-border-color" data-aos="fade-up" data-aos-delay="500">
+                    <button class="faq-question w-full flex justify-between items-center p-6 text-left focus:outline-none">
+                        <span class="text-lg font-medium text-text-primary">Do you offer support for technical issues?</span>
+                        <div class="ml-4 h-5 w-5 flex items-center justify-center faq-icon-container">
+                            <i class="fas fa-chevron-down text-primary transform transition-transform duration-300 group-[.active]:rotate-180"></i>
+                        </div>
+                    </button>
+                    <div class="faq-answer px-6 pb-6 pt-0 max-h-0 overflow-hidden transition-all duration-300 group-[.active]:max-h-96 group-[.active]:pb-6">
+                        <div class="text-text-secondary">
+                            <p>Absolutely! We provide comprehensive support including documentation, tutorials, community forums, and direct support channels. Enterprise customers get dedicated technical account managers.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Enhanced Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, #22c55e 2px, transparent 2px), radial-gradient(circle at 75% 75%, #22c55e 2px, transparent 2px); background-size: 50px 50px;"></div>
+        </div>
+        
+        <!-- Animated Background Elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-0 left-1/2 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style="animation-delay: 4s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="mb-6 group">
+                        <div class="inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-1">
+                            <img src="logo-light.png" alt="Transalo Logo" class="h-14 w-auto filter drop-shadow-lg">
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-8 max-w-md leading-relaxed text-lg">
+                        Empowering websites to reach global audiences with AI-powered translation technology. 
+                        <span class="text-green-400 font-medium">Transform your digital presence today.</span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-twitter text-xl"></i>
+                                <div class="social-tooltip">Follow us on Twitter</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-linkedin text-xl"></i>
+                                <div class="social-tooltip">Connect on LinkedIn</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-github text-xl"></i>
+                                <div class="social-tooltip">View on GitHub</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-youtube text-xl"></i>
+                                <div class="social-tooltip">Watch on YouTube</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Links -->
+                <div class="footer-section">
+                    <h4 class="footer-section-title">
+                       
+                        Product
+                    </h4>
+                    <ul class="footer-links-list">
+                        <li><a href="#features" class="footer-link-enhanced">Features</a></li>
+                        <li><a href="#statistics" class="footer-link-enhanced">Statistics</a></li>
+                        <li><a href="#partners" class="footer-link-enhanced">Partners</a></li>
+                        <li><a href="#pricing" class="footer-link-enhanced">Pricing</a></li>
+                        <li><a href="#" class="footer-link-enhanced">API Documentation</a></li>
+                        <li><a href="#" class="footer-link-enhanced">SDKs</a></li>
+                        <li><a href="#" class="footer-link-enhanced">Integration Guides</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links -->
+                <div class="footer-section">
+                    <h4 class="footer-section-title">
+                        
+                        Company
+                    </h4>
+                    <ul class="footer-links-list">
+                        <li><a href="#" class="footer-link-enhanced">About Us</a></li>
+                        <li><a href="#" class="footer-link-enhanced">Blog</a></li>
+                        <li><a href="#" class="footer-link-enhanced">Careers</a></li>
+                        <li><a href="#" class="footer-link-enhanced">Contact</a></li>
+                        <li><a href="#" class="footer-link-enhanced">Press Kit</a></li>
+                        <li><a href="#" class="footer-link-enhanced">Investors</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="mt-16 pt-12 border-t border-gray-700">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">
+                            Stay Updated
+                            
+                        </h3>
+                        <p class="text-gray-300 text-lg">
+                            Get the latest updates on new features, tips, and industry insights.
+                        </p>
+                    </div>
+                    <div class="newsletter-form-container">
+                        <form class="newsletter-form">
+                            <div class="newsletter-input-group">
+                                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                                <button type="submit" class="newsletter-button">
+                                    <span>Subscribe</span>
+                                    <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-700 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                        <p class="text-gray-400 text-sm">
+                            © 2025 <span class="text-green-400 font-semibold">Transalo</span>. All rights reserved.
+                        </p>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-medium">Live</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                        <a href="#" class="footer-bottom-link">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Privacy Policy
+                        </a>
+                        <a href="#" class="footer-bottom-link">
+                            <i class="fas fa-file-contract mr-2"></i>
+                            Terms of Service
+                        </a>
+                        <a href="#" class="footer-bottom-link">
+                            <i class="fas fa-cookie-bite mr-2"></i>
+                            Cookie Policy
+                        </a>
+                        <a href="#" class="footer-bottom-link">
+                            <i class="fas fa-cog mr-2"></i>
+                            Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="script.js"></script>
+</body>
+</html> 
