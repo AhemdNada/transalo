@@ -1,9 +1,35 @@
-// Initialize AOS (Animate On Scroll)
+// Initialize AOS (Animate On Scroll) with mobile optimizations
+const isMobile = window.innerWidth <= 768;
+
 AOS.init({
-    duration: 800,
+    duration: isMobile ? 600 : 800,
     easing: 'ease-in-out',
     once: true,
-    offset: 100
+    offset: isMobile ? 80 : 100, 
+    disable: false, 
+    startEvent: 'DOMContentLoaded',
+    initClassName: 'aos-init',
+    animatedClassName: 'aos-animate',
+    useClassNames: false,
+    disableMutationObserver: false,
+    debounceDelay: 50,
+    throttleDelay: 99,
+    
+    mirror: false, 
+    anchorPlacement: 'top-bottom'
+});
+
+// Reinitialize AOS on window 
+let resizeTimer;
+window.addEventListener('resize', () => {
+    clearTimeout(resizeTimer);
+    resizeTimer = setTimeout(() => {
+        const newIsMobile = window.innerWidth <= 768;
+        if (newIsMobile !== isMobile) {
+           
+            AOS.refresh();
+        }
+    }, 250);
 });
 
 // DOM Elements
@@ -148,7 +174,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initCounterAnimation();
 });
 
-// Billing Toggle (Monthly/Yearly)
+// (Monthly/Yearly)
 const SLIDER_MOVE_PX = 20;
 let isYearly = false;
 
@@ -156,7 +182,7 @@ if (billingToggle && toggleSlider) {
     billingToggle.addEventListener('click', () => {
         isYearly = !isYearly;
 
-        // Update slider UI
+        // Update slider
         toggleSlider.style.transform = `translateX(${isYearly ? SLIDER_MOVE_PX : 0}px)`;
         billingToggle.classList.toggle('bg-primary', isYearly);
         billingToggle.classList.toggle('bg-gray-200', !isYearly);
@@ -178,7 +204,7 @@ function updatePricing() {
 }
 
 function toggleFaqItem(faqItem) {
-    // Toggle current item
+    
     faqItem.classList.toggle('active');
 
     // Close other items
@@ -200,7 +226,7 @@ document.querySelectorAll('.faq-question').forEach(button => {
 // Handler for icon click
 document.querySelectorAll('.faq-icon-container').forEach(iconContainer => {
     iconContainer.addEventListener('click', (e) => {
-        e.stopPropagation(); // Prevent question click from firing
+        e.stopPropagation(); 
         const faqItem = iconContainer.closest('.group');
         if (faqItem) toggleFaqItem(faqItem);
     });
@@ -227,34 +253,34 @@ async function copyCode() {
 
 // Show notification
 function showNotification(message, type = 'info') {
-    // Create notification element
+    
     const notification = document.createElement('div');
     notification.className = `fixed top-4 right-4 z-50 px-6 py-3 rounded-lg text-white font-medium transform translate-x-full opacity-0 transition-all duration-300 shadow-lg`;
     notification.setAttribute('role', 'alert');
     notification.setAttribute('aria-live', 'polite');
 
-    // Set background color based on type
+    
     switch (type) {
         case 'success':
-            notification.style.backgroundColor = '#10b981'; // Green
+            notification.style.backgroundColor = '#10b981'; 
             break;
         case 'error':
-            notification.style.backgroundColor = '#ef4444'; // Red
+            notification.style.backgroundColor = '#ef4444'; 
             break;
         default:
-            notification.style.backgroundColor = '#3b82f6'; // Blue
+            notification.style.backgroundColor = '#3b82f6'; 
     }
 
     notification.textContent = message;
     document.body.appendChild(notification);
 
-    // Animate in
+   
     setTimeout(() => {
         notification.style.transform = 'translateX(0)';
         notification.style.opacity = '1';
     }, 50);
 
-    // Animate out and remove
+   
     setTimeout(() => {
         notification.style.transform = 'translateX(100%)';
         notification.style.opacity = '0';
@@ -272,7 +298,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         const target = document.querySelector(this.getAttribute('href'));
         
         if (target) {
-            const offsetTop = target.offsetTop - 80; // Account for fixed navbar
+            const offsetTop = target.offsetTop - 80; 
             window.scrollTo({
                 top: offsetTop,
                 behavior: 'smooth'
@@ -300,12 +326,10 @@ function handleLanguageChange(selectorClass) {
 
     selector.addEventListener('change', function () {
         const selectedLanguage = this.value;
-        // const selectedText = this.options[this.selectedIndex].text;
+        
 
         console.log(`Language changed (${selectorClass}):`, selectedLanguage);
-        // showNotification(`Language changed to ${selectedText}`, 'info');
-
-        // TODO: Apply actual language switching logic here
+        
     });
 }
 
@@ -314,7 +338,7 @@ function handleLanguageChange(selectorClass) {
 
 
 
-// Intersection Observer for animations
+// Intersection Observer 
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'
@@ -328,12 +352,12 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-// Observe elements for animation
+
 document.querySelectorAll('.feature-card, .pricing-card, .group').forEach(el => {
     observer.observe(el);
 });
 
-// Parallax effect for header illustration
+
 window.addEventListener('scroll', () => {
     const scrolled = window.pageYOffset;
     const illustration = document.querySelector('.relative.z-10');
@@ -344,7 +368,7 @@ window.addEventListener('scroll', () => {
     }
 });
 
-// Performance optimization: Lazy load images
+// Lazy load images
 document.addEventListener('DOMContentLoaded', () => {
     const images = document.querySelectorAll('img[data-src]');
     
@@ -362,21 +386,21 @@ document.addEventListener('DOMContentLoaded', () => {
     images.forEach(img => imageObserver.observe(img));
 });
 
-// Keyboard navigation support
+//  navigation 
 document.addEventListener('keydown', (e) => {
-    // Enter key on FAQ questions
+    
     if (e.key === 'Enter' && e.target.classList.contains('faq-question')) {
         e.target.click();
     }
 });
 
-// Analytics tracking (demo purposes)
+
 function trackEvent(eventName, properties = {}) {
     console.log('Analytics Event:', eventName, properties);
-    // Here you would typically send to your analytics service
+    
 }
 
-// Track important user interactions
+
 document.addEventListener('click', (e) => {
     if (e.target.matches('button')) {
         const buttonText = e.target.textContent.trim();
@@ -389,7 +413,7 @@ document.addEventListener('click', (e) => {
     }
 });
 
-// Service Worker registration for PWA capabilities
+
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('/sw.js')
@@ -402,11 +426,53 @@ if ('serviceWorker' in navigator) {
     });
 }
 
-// Export functions for potential external use
+// Export functions 
 window.TransaloLanding = {
     copyCode,
     showNotification,
     trackEvent,
     updatePricing,
     toggleMobileMenu
-}; 
+};
+// Typing Effect 
+document.addEventListener('DOMContentLoaded', () => {
+    const typingElement = document.querySelector('.typing-effect');
+    if (!typingElement) return;
+
+    const words = ["Instantly", "Accurately", "Fast", "Seamlessly"];
+    let wordIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+
+    const speeds = {
+        typing: 90,
+        deleting: 55,
+        pauseAfterWord: 1400,
+        pauseBeforeTyping: 350
+    };
+
+    const type = () => {
+        const currentWord = words[wordIndex];
+        const visibleText = isDeleting
+            ? currentWord.substring(0, charIndex - 1)
+            : currentWord.substring(0, charIndex + 1);
+
+        typingElement.textContent = visibleText;
+        charIndex += isDeleting ? -1 : 1;
+
+        let delay = isDeleting ? speeds.deleting : speeds.typing;
+
+        if (!isDeleting && charIndex === currentWord.length) {
+            delay = speeds.pauseAfterWord;
+            isDeleting = true;
+        } else if (isDeleting && charIndex === 0) {
+            isDeleting = false;
+            wordIndex = (wordIndex + 1) % words.length;
+            delay = speeds.pauseBeforeTyping;
+        }
+
+        setTimeout(type, delay);
+    };
+
+    setTimeout(type, 700); 
+});
