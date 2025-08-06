@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>SDKs - Transalo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-white overflow-x-hidden">
+    <!-- start Navbar -->
+    <nav class="fixed top-4 w-full bg-white/95 backdrop-blur-sm z-50 border-2 border-green-600 rounded-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="block">
+                            <img src="images/logo-dark.png" alt="Transalo Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#features" class="nav-link">Features</a>
+                        <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+                        <a href="index.html#pricing" class="nav-link">Pricing</a>
+                        <a href="index.html#faq" class="nav-link">FAQ</a>
+                    </div>
+                </div>
+
+                <!-- Right side items -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <!-- Language Selector -->
+                    <div class="relative">
+                        <select class="desktop-language-selector">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                        </select>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex items-center space-x-3">
+                        <button class="desktop-btn-secondary">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Login
+                        </button>
+                        <button class="desktop-btn-primary">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="mobile-menu-btn text-gray-600 hover:text-primary transition-colors duration-200" type="button" aria-label="Open mobile menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Navigation -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 md:hidden">
+        <!-- Backdrop -->
+        <div id="mobile-backdrop" class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+        
+        <!-- Sidebar -->
+        <div id="mobile-sidebar-content" class="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center">
+                    <a href="index.html" class="block">
+                        <img src="images/logo-dark.png" alt="Transalo Logo" class="h-8 w-auto inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-1">
+                    </a>
+                </div>
+                <button id="mobile-close-button" class="text-gray-500 hover:text-gray-700 transition-colors duration-200" type="button" aria-label="Close mobile menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="p-6">
+                <div class="space-y-4">
+                    <a href="index.html#features" class="mobile-sidebar-link">
+                        <i class="fas fa-star mr-3 text-primary"></i>
+                        Features
+                    </a>
+                    <a href="index.html#how-it-works" class="mobile-sidebar-link">
+                        <i class="fas fa-cogs mr-3 text-primary"></i>
+                        How It Works
+                    </a>
+                    <a href="index.html#pricing" class="mobile-sidebar-link">
+                        <i class="fas fa-tags mr-3 text-primary"></i>
+                        Pricing
+                    </a>
+                    <a href="index.html#faq" class="mobile-sidebar-link">
+                        <i class="fas fa-question-circle mr-3 text-primary"></i>
+                        FAQ
+                    </a>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                    <select class="mobile-language-selector">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="mt-6 space-y-3">
+                    <button class="mobile-btn-secondary w-full">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Login
+                    </button>
+                    <button class="mobile-btn-primary w-full">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-16 bg-white header-full-height" style="padding-top: 7rem;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Official SDKs
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+                    Choose your preferred programming language and get started with our official SDKs. 
+                    Each SDK is designed to make integration seamless and efficient.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-primary btn-large">
+                        <i class="fas fa-download mr-2"></i>
+                        Download All SDKs
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-book mr-2"></i>
+                        View Documentation
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Official SDKs Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Official SDKs
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Production-ready SDKs with full API support, comprehensive documentation, and active maintenance
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- JavaScript SDK -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-js-square"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Official</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">JavaScript</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Full-featured SDK for Node.js and browser environments with TypeScript support.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="sdk-install-btn w-full btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            npm install @transalo/sdk
+                        </button>
+                        <button class="sdk-docs-btn w-full btn-secondary">
+                            <i class="fas fa-book mr-2"></i>
+                            View Docs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Python SDK -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Official</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Python</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Python SDK with async support, comprehensive error handling, and Django/Flask integrations.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="sdk-install-btn w-full btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            pip install transalo
+                        </button>
+                        <button class="sdk-docs-btn w-full btn-secondary">
+                            <i class="fas fa-book mr-2"></i>
+                            View Docs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- PHP SDK -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-php"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Official</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">PHP</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        PHP SDK with Laravel integration, Composer support, and PSR standards compliance.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="sdk-install-btn w-full btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            composer require transalo/sdk
+                        </button>
+                        <button class="sdk-docs-btn w-full btn-secondary">
+                            <i class="fas fa-book mr-2"></i>
+                            View Docs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Ruby SDK -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fas fa-gem"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Official</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Ruby</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Ruby gem with Rails integration, comprehensive testing, and Ruby best practices.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="sdk-install-btn w-full btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            gem install transalo
+                        </button>
+                        <button class="sdk-docs-btn w-full btn-secondary">
+                            <i class="fas fa-book mr-2"></i>
+                            View Docs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Go SDK -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Official</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Go</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Go SDK with high performance, goroutine support, and idiomatic Go patterns.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="sdk-install-btn w-full btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            go get github.com/transalo/sdk
+                        </button>
+                        <button class="sdk-docs-btn w-full btn-secondary">
+                            <i class="fas fa-book mr-2"></i>
+                            View Docs
+                        </button>
+                    </div>
+                </div>
+
+                <!-- .NET SDK -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-microsoft"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Official</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">.NET</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        .NET SDK with C# support, async/await patterns, and NuGet package management.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="sdk-install-btn w-full btn-primary">
+                            <i class="fas fa-download mr-2"></i>
+                            dotnet add package Transalo
+                        </button>
+                        <button class="sdk-docs-btn w-full btn-secondary">
+                            <i class="fas fa-book mr-2"></i>
+                            View Docs
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Community SDKs Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Community SDKs
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Community-contributed SDKs for additional programming languages and frameworks
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+                <!-- Swift -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-xl">
+                            <i class="fab fa-swift"></i>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Community</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Swift</h3>
+                    <p class="text-gray-600 text-sm mb-4">iOS and macOS SDK with SwiftUI support</p>
+                    <button class="text-primary text-sm font-medium hover:underline">
+                        View on GitHub <i class="fas fa-external-link-alt ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Kotlin -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 text-xl">
+                            <i class="fas fa-code"></i>
+                        </div>
+                        <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Community</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Kotlin</h3>
+                    <p class="text-gray-600 text-sm mb-4">Android SDK with Kotlin coroutines</p>
+                    <button class="text-primary text-sm font-medium hover:underline">
+                        View on GitHub <i class="fas fa-external-link-alt ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Rust -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-orange-100 rounded-lg flex items-center justify-center text-orange-600 text-xl">
+                            <i class="fas fa-cog"></i>
+                        </div>
+                        <span class="bg-orange-100 text-orange-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Community</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Rust</h3>
+                    <p class="text-gray-600 text-sm mb-4">High-performance Rust crate</p>
+                    <button class="text-primary text-sm font-medium hover:underline">
+                        View on GitHub <i class="fas fa-external-link-alt ml-1"></i>
+                    </button>
+                </div>
+
+                <!-- Elixir -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-xl">
+                            <i class="fas fa-atom"></i>
+                        </div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Community</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Elixir</h3>
+                    <p class="text-gray-600 text-sm mb-4">Elixir package with Phoenix support</p>
+                    <button class="text-primary text-sm font-medium hover:underline">
+                        View on GitHub <i class="fas fa-external-link-alt ml-1"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SDK Features Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    SDK Features
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    All our official SDKs come with these powerful features to make integration seamless
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Type Safety -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl mb-4">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Type Safety</h3>
+                    <p class="text-gray-600 text-sm">
+                        Full TypeScript definitions and strong typing support for all SDKs to catch errors at compile time.
+                    </p>
+                </div>
+
+                <!-- Async Support -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl mb-4">
+                        <i class="fas fa-bolt"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Async Support</h3>
+                    <p class="text-gray-600 text-sm">
+                        Built-in async/await support for non-blocking operations and optimal performance.
+                    </p>
+                </div>
+
+                <!-- Error Handling -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl mb-4">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Error Handling</h3>
+                    <p class="text-gray-600 text-sm">
+                        Comprehensive error handling with detailed error messages and retry mechanisms.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, #22c55e 2px, transparent 2px), radial-gradient(circle at 75% 75%, #22c55e 2px, transparent 2px); background-size: 50px 50px;"></div>
+        </div>
+        
+        <!-- Animated Background Elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-0 left-1/2 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style="animation-delay: 4s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="mb-6 group">
+                        <div class="inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-1">
+                            <img src="images/logo-light.png" alt="Transalo Logo" class="h-14 w-auto filter drop-shadow-lg">
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-8 max-w-md leading-relaxed text-lg">
+                        Empowering websites to reach global audiences with AI-powered translation technology. 
+                        <span class="text-green-400 font-medium">Transform your digital presence today.</span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-twitter text-xl"></i>
+                                <div class="social-tooltip">Follow us on Twitter</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-linkedin text-xl"></i>
+                                <div class="social-tooltip">Connect on LinkedIn</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-github text-xl"></i>
+                                <div class="social-tooltip">View on GitHub</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-youtube text-xl"></i>
+                                <div class="social-tooltip">Watch on YouTube</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Links -->
+                <div class="footer-section">
+                    <h4 class="footer-section-title">
+                        Product
+                    </h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html#features" class="footer-link-enhanced">Features</a></li>
+                        <li><a href="index.html#statistics" class="footer-link-enhanced">Statistics</a></li>
+                        <li><a href="index.html#partners" class="footer-link-enhanced">Partners</a></li>
+                        <li><a href="index.html#pricing" class="footer-link-enhanced">Pricing</a></li>
+                        <li><a href="api-documentation.html" class="footer-link-enhanced">API Documentation</a></li>
+                        <li><a href="sdks.html" class="footer-link-enhanced">SDKs</a></li>
+                        <li><a href="integration-guides.html" class="footer-link-enhanced">Integration Guides</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links -->
+                <div class="footer-section">
+                    <h4 class="footer-section-title">
+                        Company
+                    </h4>
+                    <ul class="footer-links-list">
+                        <li><a href="about-us.html" class="footer-link-enhanced">About Us</a></li>
+                        <li><a href="blog.html" class="footer-link-enhanced">Blog</a></li>
+                       
+                        
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="mt-16 pt-12 border-t border-gray-700">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">
+                            Stay Updated
+                        </h3>
+                        <p class="text-gray-300 text-lg">
+                            Get the latest updates on new features, tips, and industry insights.
+                        </p>
+                    </div>
+                    <div class="newsletter-form-container">
+                        <form class="newsletter-form">
+                            <div class="newsletter-input-group">
+                                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                                <button type="submit" class="newsletter-button">
+                                    <span>Subscribe</span>
+                                    <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-700 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                        <p class="text-gray-400 text-sm">
+                            © 2025 <span class="text-green-400 font-semibold">Transalo</span>. All rights reserved.
+                        </p>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-medium">Live</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                        <a href="privacy-policy.html" class="footer-bottom-link">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Privacy Policy
+                        </a>
+                        <a href="terms-of-service.html" class="footer-bottom-link">
+                            <i class="fas fa-file-contract mr-2"></i>
+                            Terms of Service
+                        </a>
+                        <a href="cookie-policy.html" class="footer-bottom-link">
+                            <i class="fas fa-cookie-bite mr-2"></i>
+                            Cookie Policy
+                        </a>
+                        <a href="settings.html" class="footer-bottom-link">
+                            <i class="fas fa-cog mr-2"></i>
+                            Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/sdks.js"></script>
+</body>
+</html> 

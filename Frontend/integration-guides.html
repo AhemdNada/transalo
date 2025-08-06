@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Integration Guides - Transalo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="icon" href="images/favicon.ico">
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="bg-white overflow-x-hidden">
+    <!-- start Navbar -->
+    <nav class="fixed top-4 w-full bg-white/95 backdrop-blur-sm z-50 border-2 border-green-600 rounded-full">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <!-- Logo -->
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <a href="index.html" class="block">
+                            <img src="images/logo-dark.png" alt="Transalo Logo" class="h-10 w-auto hover:scale-105 transition-transform duration-300">
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="index.html#features" class="nav-link">Features</a>
+                        <a href="index.html#how-it-works" class="nav-link">How It Works</a>
+                        <a href="index.html#pricing" class="nav-link">Pricing</a>
+                        <a href="index.html#faq" class="nav-link">FAQ</a>
+                    </div>
+                </div>
+
+                <!-- Right side items -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <!-- Language Selector -->
+                    <div class="relative">
+                        <select class="desktop-language-selector">
+                            <option value="en">🇺🇸 English</option>
+                            <option value="es">🇪🇸 Español</option>
+                            <option value="fr">🇫🇷 Français</option>
+                            <option value="de">🇩🇪 Deutsch</option>
+                        </select>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="flex items-center space-x-3">
+                        <button class="desktop-btn-secondary">
+                            <i class="fas fa-sign-in-alt mr-2"></i>
+                            Login
+                        </button>
+                        <button class="desktop-btn-primary">
+                            <i class="fas fa-user-plus mr-2"></i>
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-button" class="mobile-menu-btn text-gray-600 hover:text-primary transition-colors duration-200" type="button" aria-label="Open mobile menu">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Sidebar Navigation -->
+    <div id="mobile-sidebar" class="fixed inset-0 z-50 md:hidden">
+        <!-- Backdrop -->
+        <div id="mobile-backdrop" class="absolute inset-0 bg-black bg-opacity-50 transition-opacity duration-300 opacity-0 pointer-events-none"></div>
+        
+        <!-- Sidebar -->
+        <div id="mobile-sidebar-content" class="absolute right-0 top-0 h-full w-80 bg-white shadow-2xl transform translate-x-full transition-transform duration-300 ease-in-out">
+            <!-- Header -->
+            <div class="flex items-center justify-between p-6 border-b border-gray-200">
+                <div class="flex items-center">
+                    <a href="index.html" class="block">
+                        <img src="images/logo-dark.png" alt="Transalo Logo" class="h-8 w-auto inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-1">
+                    </a>
+                </div>
+                <button id="mobile-close-button" class="text-gray-500 hover:text-gray-700 transition-colors duration-200" type="button" aria-label="Close mobile menu">
+                    <i class="fas fa-times text-xl"></i>
+                </button>
+            </div>
+            
+            <!-- Navigation Links -->
+            <div class="p-6">
+                <div class="space-y-4">
+                    <a href="index.html#features" class="mobile-sidebar-link">
+                        <i class="fas fa-star mr-3 text-primary"></i>
+                        Features
+                    </a>
+                    <a href="index.html#how-it-works" class="mobile-sidebar-link">
+                        <i class="fas fa-cogs mr-3 text-primary"></i>
+                        How It Works
+                    </a>
+                    <a href="index.html#pricing" class="mobile-sidebar-link">
+                        <i class="fas fa-tags mr-3 text-primary"></i>
+                        Pricing
+                    </a>
+                    <a href="index.html#faq" class="mobile-sidebar-link">
+                        <i class="fas fa-question-circle mr-3 text-primary"></i>
+                        FAQ
+                    </a>
+                </div>
+                
+                <!-- Language Selector -->
+                <div class="mt-8 pt-6 border-t border-gray-200">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">Language</label>
+                    <select class="mobile-language-selector">
+                        <option value="en">🇺🇸 English</option>
+                        <option value="es">🇪🇸 Español</option>
+                        <option value="fr">🇫🇷 Français</option>
+                        <option value="de">🇩🇪 Deutsch</option>
+                    </select>
+                </div>
+                
+                <!-- Buttons -->
+                <div class="mt-6 space-y-3">
+                    <button class="mobile-btn-secondary w-full">
+                        <i class="fas fa-sign-in-alt mr-2"></i>
+                        Login
+                    </button>
+                    <button class="mobile-btn-primary w-full">
+                        <i class="fas fa-user-plus mr-2"></i>
+                        Sign Up
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header Section -->
+    <section class="pt-24 pb-16 bg-white header-full-height" style="padding-top: 7rem;">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
+            <div class="text-center" data-aos="fade-up">
+                <h1 class="text-5xl lg:text-6xl font-bold text-gray-900 mb-6">
+                    Integration Guides
+                </h1>
+                <p class="text-xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
+                    Step-by-step guides to integrate Transalo into your favorite platforms and frameworks. 
+                    Get up and running in minutes with our comprehensive tutorials.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                    <button class="btn-primary btn-large">
+                        <i class="fas fa-rocket mr-2"></i>
+                        Get Started
+                    </button>
+                    <button class="btn-secondary">
+                        <i class="fas fa-search mr-2"></i>
+                        Browse Guides
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Popular Integrations Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Popular Integrations
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Choose your platform and follow our step-by-step integration guides
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- WordPress -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-wordpress"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Popular</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">WordPress</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Complete WordPress integration with plugin support and theme compatibility.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="guide-view-btn w-full btn-primary">
+                            <i class="fas fa-play mr-2"></i>
+                            View Guide
+                        </button>
+                        <button class="guide-download-btn w-full btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Download Plugin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- React -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-xl">
+                            <i class="fab fa-react"></i>
+                        </div>
+                        <span class="bg-blue-100 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Popular</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">React</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        React hooks and components for seamless translation integration.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="guide-view-btn w-full btn-primary">
+                            <i class="fas fa-play mr-2"></i>
+                            View Guide
+                        </button>
+                        <button class="guide-download-btn w-full btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Install Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Vue.js -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-vuejs"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Popular</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Vue.js</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Vue.js plugin with directives and composables for easy integration.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="guide-view-btn w-full btn-primary">
+                            <i class="fas fa-play mr-2"></i>
+                            View Guide
+                        </button>
+                        <button class="guide-download-btn w-full btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Install Plugin
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Shopify -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="400">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-xl">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <span class="bg-purple-100 text-purple-800 text-xs font-medium px-2.5 py-0.5 rounded-full">E-commerce</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Shopify</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Shopify app for multi-language storefronts and product translations.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="guide-view-btn w-full btn-primary">
+                            <i class="fas fa-play mr-2"></i>
+                            View Guide
+                        </button>
+                        <button class="guide-download-btn w-full btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Install App
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Laravel -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="500">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-600 text-xl">
+                            <i class="fas fa-server"></i>
+                        </div>
+                        <span class="bg-red-100 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Backend</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Laravel</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Laravel package with middleware, facades, and artisan commands.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="guide-view-btn w-full btn-primary">
+                            <i class="fas fa-play mr-2"></i>
+                            View Guide
+                        </button>
+                        <button class="guide-download-btn w-full btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Install Package
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Django -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="600">
+                    <div class="flex items-center justify-between mb-4">
+                        <div class="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center text-green-600 text-xl">
+                            <i class="fab fa-python"></i>
+                        </div>
+                        <span class="bg-green-100 text-green-800 text-xs font-medium px-2.5 py-0.5 rounded-full">Backend</span>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Django</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Django app with template tags, management commands, and admin integration.
+                    </p>
+                    <div class="space-y-3">
+                        <button class="guide-view-btn w-full btn-primary">
+                            <i class="fas fa-play mr-2"></i>
+                            View Guide
+                        </button>
+                        <button class="guide-download-btn w-full btn-secondary">
+                            <i class="fas fa-download mr-2"></i>
+                            Install App
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Step-by-Step Guide Section -->
+    <section class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    WordPress Integration Guide
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Follow this step-by-step guide to integrate Transalo into your WordPress site
+                </p>
+            </div>
+
+            <div class="grid lg:grid-cols-2 gap-12 items-start">
+                <!-- Steps -->
+                <div data-aos="fade-right">
+                    <div class="space-y-8">
+                        <!-- Step 1 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                1
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Install the Plugin</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Download and install the Transalo WordPress plugin from the WordPress admin panel.
+                                </p>
+                                <button class="text-primary font-semibold hover:underline">
+                                    Download Plugin <i class="fas fa-external-link-alt ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                2
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Configure API Key</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Add your Transalo API key in the plugin settings under Settings > Transalo.
+                                </p>
+                                <button class="text-primary font-semibold hover:underline">
+                                    Get API Key <i class="fas fa-external-link-alt ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                3
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Select Languages</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Choose which languages you want to support and configure language switcher.
+                                </p>
+                                <button class="text-primary font-semibold hover:underline">
+                                    View Languages <i class="fas fa-external-link-alt ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-primary rounded-full flex items-center justify-center text-white font-bold text-sm">
+                                4
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-bold text-gray-900 mb-2">Test Integration</h3>
+                                <p class="text-gray-600 mb-4">
+                                    Test the integration by switching languages and verifying translations.
+                                </p>
+                                <button class="text-primary font-semibold hover:underline">
+                                    Run Test <i class="fas fa-play ml-1"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Code Example -->
+                <div data-aos="fade-left">
+                    <div class="bg-gray-900 rounded-xl p-6 shadow-lg">
+                        <div class="flex items-center justify-between mb-4">
+                            <h3 class="text-white font-semibold">WordPress Configuration</h3>
+                            <button class="copy-code-btn text-gray-400 hover:text-white transition-colors">
+                                <i class="fas fa-copy"></i>
+                            </button>
+                        </div>
+                        <pre class="text-green-400 text-sm overflow-x-auto"><code>// Add to functions.php
+add_action('wp_enqueue_scripts', 'transalo_enqueue_scripts');
+
+function transalo_enqueue_scripts() {
+    wp_enqueue_script(
+        'transalo-script',
+        plugin_dir_url(__FILE__) . 'js/transalo.js',
+        array('jquery'),
+        '1.0.0',
+        true
+    );
+    
+    wp_localize_script('transalo-script', 'transalo_ajax', array(
+        'ajax_url' => admin_url('admin-ajax.php'),
+        'nonce' => wp_create_nonce('transalo_nonce')
+    ));
+}
+
+// Add language switcher
+function transalo_language_switcher() {
+    $languages = get_option('transalo_languages', array());
+    $current_lang = get_option('transalo_current_language', 'en');
+    
+    echo '<div class="transalo-language-switcher">';
+    foreach ($languages as $lang) {
+        $active = ($lang === $current_lang) ? 'active' : '';
+        echo '<a href="#" class="lang-link ' . $active . '" data-lang="' . $lang . '">' . strtoupper($lang) . '</a>';
+    }
+    echo '</div>';
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Framework Categories Section -->
+    <section class="py-20 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    Framework Categories
+                </h2>
+                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
+                    Find integration guides for your specific technology stack
+                </p>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Frontend Frameworks -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="100">
+                    <div class="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center text-blue-600 text-xl mb-4">
+                        <i class="fas fa-desktop"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Frontend Frameworks</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        React, Vue.js, Angular, Svelte, and other modern frontend frameworks.
+                    </p>
+                    <a href="#" class="text-primary font-semibold hover:underline">
+                        Browse Frontend Guides <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- Backend Frameworks -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="200">
+                    <div class="w-12 h-12 bg-red-100 rounded-lg flex items-center justify-center text-red-600 text-xl mb-4">
+                        <i class="fas fa-server"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">Backend Frameworks</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Laravel, Django, Express.js, Spring Boot, and other backend frameworks.
+                    </p>
+                    <a href="#" class="text-primary font-semibold hover:underline">
+                        Browse Backend Guides <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+
+                <!-- E-commerce Platforms -->
+                <div class="bg-gray-50 p-6 rounded-xl hover:shadow-lg transition-all duration-300" data-aos="fade-up" data-aos-delay="300">
+                    <div class="w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center text-purple-600 text-xl mb-4">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3 class="text-lg font-bold text-gray-900 mb-2">E-commerce Platforms</h3>
+                    <p class="text-gray-600 text-sm mb-4">
+                        Shopify, WooCommerce, Magento, and other e-commerce platforms.
+                    </p>
+                    <a href="#" class="text-primary font-semibold hover:underline">
+                        Browse E-commerce Guides <i class="fas fa-arrow-right ml-1"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900 text-white py-20 relative overflow-hidden">
+        <!-- Background Pattern -->
+        <div class="absolute inset-0 opacity-5">
+            <div class="absolute inset-0" style="background-image: radial-gradient(circle at 25% 25%, #22c55e 2px, transparent 2px), radial-gradient(circle at 75% 75%, #22c55e 2px, transparent 2px); background-size: 50px 50px;"></div>
+        </div>
+        
+        <!-- Animated Background Elements -->
+        <div class="absolute top-0 left-0 w-64 h-64 bg-green-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse"></div>
+        <div class="absolute top-0 right-0 w-64 h-64 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style="animation-delay: 2s;"></div>
+        <div class="absolute bottom-0 left-1/2 w-64 h-64 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse" style="animation-delay: 4s;"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid md:grid-cols-4 gap-12">
+                <!-- Company Info -->
+                <div class="md:col-span-2">
+                    <div class="mb-6 group">
+                        <div class="inline-block transform transition-all duration-300 group-hover:scale-105 group-hover:rotate-1">
+                            <img src="images/logo-light.png" alt="Transalo Logo" class="h-14 w-auto filter drop-shadow-lg">
+                        </div>
+                    </div>
+                    <p class="text-gray-300 mb-8 max-w-md leading-relaxed text-lg">
+                        Empowering websites to reach global audiences with AI-powered translation technology. 
+                        <span class="text-green-400 font-medium">Transform your digital presence today.</span>
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-twitter text-xl"></i>
+                                <div class="social-tooltip">Follow us on Twitter</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-linkedin text-xl"></i>
+                                <div class="social-tooltip">Connect on LinkedIn</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-github text-xl"></i>
+                                <div class="social-tooltip">View on GitHub</div>
+                            </div>
+                        </a>
+                        <a href="#" class="social-link-enhanced group">
+                            <div class="social-icon-wrapper">
+                                <i class="fab fa-youtube text-xl"></i>
+                                <div class="social-tooltip">Watch on YouTube</div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Product Links -->
+                <div class="footer-section">
+                    <h4 class="footer-section-title">
+                        Product
+                    </h4>
+                    <ul class="footer-links-list">
+                        <li><a href="index.html#features" class="footer-link-enhanced">Features</a></li>
+                        <li><a href="index.html#statistics" class="footer-link-enhanced">Statistics</a></li>
+                        <li><a href="index.html#partners" class="footer-link-enhanced">Partners</a></li>
+                        <li><a href="index.html#pricing" class="footer-link-enhanced">Pricing</a></li>
+                        <li><a href="api-documentation.html" class="footer-link-enhanced">API Documentation</a></li>
+                        <li><a href="sdks.html" class="footer-link-enhanced">SDKs</a></li>
+                        <li><a href="integration-guides.html" class="footer-link-enhanced">Integration Guides</a></li>
+                    </ul>
+                </div>
+
+                <!-- Company Links -->
+                <div class="footer-section">
+                    <h4 class="footer-section-title">
+                        Company
+                    </h4>
+                    <ul class="footer-links-list">
+                        <li><a href="about-us.html" class="footer-link-enhanced">About Us</a></li>
+                        <li><a href="blog.html" class="footer-link-enhanced">Blog</a></li>
+                     
+                     
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Newsletter Section -->
+            <div class="mt-16 pt-12 border-t border-gray-700">
+                <div class="grid md:grid-cols-2 gap-8 items-center">
+                    <div>
+                        <h3 class="text-2xl font-bold mb-3 text-white">
+                            Stay Updated
+                        </h3>
+                        <p class="text-gray-300 text-lg">
+                            Get the latest updates on new features, tips, and industry insights.
+                        </p>
+                    </div>
+                    <div class="newsletter-form-container">
+                        <form class="newsletter-form">
+                            <div class="newsletter-input-group">
+                                <input type="email" placeholder="Enter your email" class="newsletter-input">
+                                <button type="submit" class="newsletter-button">
+                                    <span>Subscribe</span>
+                                    <i class="fas fa-paper-plane ml-2"></i>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bottom Section -->
+            <div class="border-t border-gray-700 mt-12 pt-8">
+                <div class="flex flex-col md:flex-row justify-between items-center">
+                    <div class="flex items-center space-x-4 mb-4 md:mb-0">
+                        <p class="text-gray-400 text-sm">
+                            © 2025 <span class="text-green-400 font-semibold">Transalo</span>. All rights reserved.
+                        </p>
+                        <div class="flex items-center space-x-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 text-xs font-medium">Live</span>
+                        </div>
+                    </div>
+                    <div class="flex flex-wrap justify-center md:justify-end space-x-6">
+                        <a href="privacy-policy.html" class="footer-bottom-link">
+                            <i class="fas fa-shield-alt mr-2"></i>
+                            Privacy Policy
+                        </a>
+                        <a href="terms-of-service.html" class="footer-bottom-link">
+                            <i class="fas fa-file-contract mr-2"></i>
+                            Terms of Service
+                        </a>
+                        <a href="cookie-policy.html" class="footer-bottom-link">
+                            <i class="fas fa-cookie-bite mr-2"></i>
+                            Cookie Policy
+                        </a>
+                        <a href="settings.html" class="footer-bottom-link">
+                            <i class="fas fa-cog mr-2"></i>
+                            Settings
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="js/integration-guides.js"></script>
+</body>
+</html> 
